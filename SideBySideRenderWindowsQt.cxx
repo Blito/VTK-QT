@@ -6,11 +6,40 @@
 #include <vtkQtTableView.h>
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
+#include <vtkActor.h>
 #include <vtkSphereSource.h>
 #include <vtkCubeSource.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkInteractorStyleTrackballCamera.h>
+#include <vtkCommand.h>
 #include <vtkSmartPointer.h>
 
 #include <QImage>
+
+vtkActor * cubeActor;
+vtkRenderWindow * renWin;
+float rot = 0.0f;
+
+class RotateCommand : public vtkCommand
+{
+public:
+    vtkTypeMacro(RotateCommand, vtkCommand);
+
+    static RotateCommand * New()
+    {
+        return new RotateCommand;
+    }
+
+    void Execute(vtkObject * vtkNotUsed(caller),
+                 unsigned long vtkNotUsed(eventId),
+                 void * vtkNotUsed(callData))
+    {
+        cubeActor->SetOrientation(0,0,0);
+        cubeActor->RotateZ(rot++);
+
+        renWin->Render();
+    }
+};
 
 // Constructor
 SideBySideRenderWindowsQt::SideBySideRenderWindowsQt(unsigned char * data, SimThread &thread) :
@@ -29,10 +58,27 @@ SideBySideRenderWindowsQt::SideBySideRenderWindowsQt(unsigned char * data, SimTh
       vtkSmartPointer<vtkActor>::New();
   sphereActor->SetMapper(sphereMapper);
 
+  // Cube
+  vtkSmartPointer<vtkCubeSource> cubeSource =
+      vtkSmartPointer<vtkCubeSource>::New();
+  cubeSource->Update();
+  vtkSmartPointer<vtkPolyDataMapper> cubeMapper =
+      vtkSmartPointer<vtkPolyDataMapper>::New();
+  cubeMapper->SetInputConnection(cubeSource->GetOutputPort());
+  cubeActor = vtkActor::New();
+  cubeActor->SetMapper(cubeMapper);
+
   // VTK Renderer
   vtkSmartPointer<vtkRenderer> leftRenderer = 
       vtkSmartPointer<vtkRenderer>::New();
   leftRenderer->AddActor(sphereActor);
+  leftRenderer->AddActor(cubeActor);
+
+  renWin = qvtkWidgetLeft->GetRenderWindow();
+  vtkRenderWindowInteractor * renderWindowInteractor = qvtkWidgetLeft->GetInteractor();
+  renderWindowInteractor->CreateRepeatingTimer(1);
+  RotateCommand * rotateCallback =  RotateCommand::New();
+  renderWindowInteractor->AddObserver(vtkCommand::TimerEvent, rotateCallback );
 
   // VTK/Qt wedded
   this->qvtkWidgetLeft->GetRenderWindow()->AddRenderer(leftRenderer);

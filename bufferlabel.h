@@ -13,9 +13,6 @@ public:
 
 public slots:
     void updateBuffer(unsigned char * buffer, unsigned int width, unsigned int height);
-
-private:
-    class QImage * image;
 };
 
 #endif // BUFFERLABEL_H

@@ -17,7 +17,7 @@ public:
 
   // Constructor/Destructor
   SideBySideRenderWindowsQt(unsigned char * data, SimThread &thread);
-  ~SideBySideRenderWindowsQt() {};
+  ~SideBySideRenderWindowsQt() {}
 
 public slots:
 
