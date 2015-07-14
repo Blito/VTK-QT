@@ -86,7 +86,7 @@ SideBySideRenderWindowsQt::SideBySideRenderWindowsQt(unsigned char * data, SimTh
   // Set up action signals and slots
   connect(this->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
 
-  connect(&thread, SIGNAL(frameFinished(unsigned char*,uint,uint)), this->label, SLOT(updateBuffer(unsigned char*,uint,uint)));
+  connect(&thread, SIGNAL(frameFinished(const unsigned char*,uint,uint)), this->label, SLOT(updateBuffer(const unsigned char*,uint,uint)));
 
 }
 

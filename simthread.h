@@ -16,7 +16,7 @@ public:
     const unsigned int arrayHeight = 256;
 
 signals:
-    void frameFinished(unsigned char * buffer, unsigned int width, unsigned int height);
+    void frameFinished(const unsigned char * buffer, unsigned int width, unsigned int height);
 
 private:
     void run() override;

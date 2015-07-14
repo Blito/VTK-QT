@@ -12,7 +12,14 @@ public:
     ~BufferLabel();
 
 public slots:
-    void updateBuffer(unsigned char * buffer, unsigned int width, unsigned int height);
+    void updateBuffer(const unsigned char * buffer, unsigned int width, unsigned int height);
+
+private:
+    void mousePressEvent(QMouseEvent * event);
+    void mouseReleaseEvent(QMouseEvent * event);
+
+    QPoint begin, end;
+    bool isDragging = false;
 };
 
 #endif // BUFFERLABEL_H
