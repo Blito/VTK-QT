@@ -15,6 +15,7 @@ public slots:
     void updateBuffer(const unsigned char * buffer, unsigned int width, unsigned int height);
 
 private:
+    void mouseMoveEvent(QMouseEvent * event);
     void mousePressEvent(QMouseEvent * event);
     void mouseReleaseEvent(QMouseEvent * event);
 

@@ -28,6 +28,11 @@ void BufferLabel::updateBuffer(const unsigned char * buffer, unsigned int width,
     adjustSize();
 }
 
+void BufferLabel::mouseMoveEvent(QMouseEvent * event)
+{
+    end = event->pos();
+}
+
 void BufferLabel::mousePressEvent(QMouseEvent * event)
 {
     begin = event->pos();

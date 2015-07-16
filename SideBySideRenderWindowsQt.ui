@@ -30,25 +30,64 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>20</y>
+      <x>0</x>
+      <y>10</y>
       <width>511</width>
       <height>541</height>
      </rect>
     </property>
    </widget>
-   <widget class="BufferLabel" name="label">
+   <widget class="QWidget" name="rightWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>100</y>
-      <width>47</width>
-      <height>13</height>
+      <x>530</x>
+      <y>10</y>
+      <width>441</width>
+      <height>521</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Hola Qt</string>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
+    <widget class="QLabel" name="header">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>40</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="resBar">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>270</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="BufferLabel" name="usLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>240</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <action name="actionOpenFile">

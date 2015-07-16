@@ -80,13 +80,19 @@ SideBySideRenderWindowsQt::SideBySideRenderWindowsQt(unsigned char * data, SimTh
   RotateCommand * rotateCallback =  RotateCommand::New();
   renderWindowInteractor->AddObserver(vtkCommand::TimerEvent, rotateCallback );
 
+  QPalette Pal(this->rightWidget->palette());
+  // Asignar el color de fondo como Negro
+  Pal.setColor(QPalette::Background, Qt::black);
+  this->rightWidget->setAutoFillBackground(true);
+  this->rightWidget->setPalette(Pal);
+
   // VTK/Qt wedded
   this->qvtkWidgetLeft->GetRenderWindow()->AddRenderer(leftRenderer);
 
   // Set up action signals and slots
   connect(this->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
 
-  connect(&thread, SIGNAL(frameFinished(const unsigned char*,uint,uint)), this->label, SLOT(updateBuffer(const unsigned char*,uint,uint)));
+  connect(&thread, SIGNAL(frameFinished(const unsigned char*,uint,uint)), this->usLabel, SLOT(updateBuffer(const unsigned char*,uint,uint)));
 
 }
 
